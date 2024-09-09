@@ -1,0 +1,19 @@
+# syntax=docker/docker-compose:2.0.0
+---
+
+name: haproxy-cluster
+
+services:
+  haproxy-main:
+    image: haproxy:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-main
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - haproxy-cluster
+
+networks:
+  haproxy-cluster:
+    name: haproxy-cluster
+    driver: bridge
